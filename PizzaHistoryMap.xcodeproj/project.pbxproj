@@ -11,19 +11,21 @@
 		E3DC5D9424C1BC20005D1D19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */; };
 		E3DC5D9624C1BC20005D1D19 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DC5D9524C1BC20005D1D19 /* ViewController.swift */; };
 		E3DC5D9924C1BC20005D1D19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5D9724C1BC20005D1D19 /* Main.storyboard */; };
-		E3DC5D9B24C1BC21005D1D19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5D9A24C1BC21005D1D19 /* Assets.xcassets */; };
 		E3DC5D9E24C1BC21005D1D19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5D9C24C1BC21005D1D19 /* LaunchScreen.storyboard */; };
+		E3DC5DA624C1BF3B005D1D19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */; };
+		E3DC5DA924C1BF6D005D1D19 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E3DC5D8E24C1BC20005D1D19 /* PizzaHistoryMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaHistoryMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3DC5D8E24C1BC20005D1D19 /* Pizza History.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza History.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DC5D9124C1BC20005D1D19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E3DC5D9524C1BC20005D1D19 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E3DC5D9824C1BC20005D1D19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E3DC5D9A24C1BC21005D1D19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3DC5D9D24C1BC21005D1D19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3DC5D9F24C1BC21005D1D19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3DC5DA924C1BF6D005D1D19 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,13 +45,14 @@
 			children = (
 				E3DC5D9024C1BC20005D1D19 /* PizzaHistoryMap */,
 				E3DC5D8F24C1BC20005D1D19 /* Products */,
+				E3DC5DA724C1BF6D005D1D19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		E3DC5D8F24C1BC20005D1D19 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E3DC5D8E24C1BC20005D1D19 /* PizzaHistoryMap.app */,
+				E3DC5D8E24C1BC20005D1D19 /* Pizza History.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,11 +64,19 @@
 				E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */,
 				E3DC5D9524C1BC20005D1D19 /* ViewController.swift */,
 				E3DC5D9724C1BC20005D1D19 /* Main.storyboard */,
-				E3DC5D9A24C1BC21005D1D19 /* Assets.xcassets */,
 				E3DC5D9C24C1BC21005D1D19 /* LaunchScreen.storyboard */,
+				E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */,
 				E3DC5D9F24C1BC21005D1D19 /* Info.plist */,
 			);
 			path = PizzaHistoryMap;
+			sourceTree = "<group>";
+		};
+		E3DC5DA724C1BF6D005D1D19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,7 +96,7 @@
 			);
 			name = PizzaHistoryMap;
 			productName = PizzaHistoryMap;
-			productReference = E3DC5D8E24C1BC20005D1D19 /* PizzaHistoryMap.app */;
+			productReference = E3DC5D8E24C1BC20005D1D19 /* Pizza History.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -126,7 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3DC5D9E24C1BC21005D1D19 /* LaunchScreen.storyboard in Resources */,
-				E3DC5D9B24C1BC21005D1D19 /* Assets.xcassets in Resources */,
+				E3DC5DA624C1BF3B005D1D19 /* Assets.xcassets in Resources */,
 				E3DC5D9924C1BC20005D1D19 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +304,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nazaif.PizzaHistoryMap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pizza History";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -310,7 +322,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nazaif.PizzaHistoryMap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pizza History";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
