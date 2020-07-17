@@ -29,6 +29,24 @@ class ViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func changeMapType(_ sender: UIButton) {
+        switch mapView.mapType {
+        case .standard:
+            mapView.mapType = .satellite
+            
+        case .satellite:
+            mapView.mapType = .hybrid
+            
+        case .hybrid:
+            mapView.mapType = .satelliteFlyover
+            
+        case .satelliteFlyover:
+            mapView.mapType = .hybridFlyover
+            
+        case .hybridFlyover:
+            mapView.mapType = .standard
+        default:
+            mapView.mapType = .standard
+        }
     }
     
     @IBAction func changePitch(_ sender: UIButton) {
