@@ -75,22 +75,27 @@ class ViewController: UIViewController {
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         switch index {
-        case 0:
+        case 0: // Naples
             coordinate2D = CLLocationCoordinate2DMake(40.8367321,14.2468856)
-        case 1:
+        case 1: // New York
             coordinate2D = CLLocationCoordinate2DMake(40.7216294 , -73.995453)
             updateMapCamera(heading: 245, altitude: 250)
             return
-        case 2:
+        case 2: //  Chicago
             coordinate2D = CLLocationCoordinate2DMake(41.892479 , -87.6267592)
             updateMapCamera(heading: 12, altitude: 2)
             return
-        case 3:
+        case 3: //  Chatham
             coordinate2D = CLLocationCoordinate2DMake(42.4056555,-82.1860369)
             updateMapCamera(heading: 180, altitude: 1000)
             return
-        case 4:
+        case 4: //  Beverly Hills
             coordinate2D = CLLocationCoordinate2DMake(34.0674607,-118.3977309)
+            let pizzaPin = MKPointAnnotation()
+            pizzaPin.coordinate = coordinate2D
+            pizzaPin.title = "Fusion Cuisine Pizza"
+            pizzaPin.subtitle = "Also known as California Pizza"
+            mapView.addAnnotation(pizzaPin)
         default:
             coordinate2D = CLLocationCoordinate2DMake(34.0674607,-118.3977309)
         }
