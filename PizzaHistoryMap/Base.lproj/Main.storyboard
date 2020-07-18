@@ -73,7 +73,7 @@
                                     <action selector="locationPicker:" destination="BYZ-38-t0r" eventType="valueChanged" id="hIJ-HT-G9f"/>
                                 </connections>
                             </segmentedControl>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-aH-jbx">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-aH-jbx">
                                 <rect key="frame" x="0.0" y="92" width="414" height="719"/>
                             </mapView>
                         </subviews>

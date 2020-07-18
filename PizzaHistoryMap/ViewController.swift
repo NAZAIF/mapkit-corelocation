@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var coordinate2D = CLLocationCoordinate2DMake(40.8367321,14.2468856)
     var camera = MKMapCamera()
     var pitch = 0
+    var isOn = false
     
     //MARK: Outlets
     @IBOutlet weak var changeMapType: UIButton!
@@ -56,6 +57,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func toggleMapFeatures(_ sender: UIButton) {
+//        mapView.showsBuildings = isOn
+//        isOn = !isOn
+        isOn = !mapView.showsPointsOfInterest
+        mapView.showsPointsOfInterest = isOn
+        mapView.showsScale = isOn
+        mapView.showsTraffic = isOn
+        mapView.showsCompass = isOn
     }
     
     @IBAction func findHere(_ sender: UIButton) {
