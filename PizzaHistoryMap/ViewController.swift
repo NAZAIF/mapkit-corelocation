@@ -74,12 +74,15 @@ class ViewController: UIViewController {
     
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
+        mapView.removeAnnotations(mapView.annotations)
         switch index {
         case 0: // Naples
             coordinate2D = CLLocationCoordinate2DMake(40.8367321,14.2468856)
         case 1: // New York
             coordinate2D = CLLocationCoordinate2DMake(40.7216294 , -73.995453)
             updateMapCamera(heading: 245, altitude: 250)
+            let pizzaPin = PizzaAnnotation(coordinate: coordinate2D, title: "New York Pizza", subtitle: "Pizza comes to America")
+            mapView.addAnnotation(pizzaPin)
             return
         case 2: //  Chicago
             coordinate2D = CLLocationCoordinate2DMake(41.892479 , -87.6267592)

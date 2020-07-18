@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E324F0D024C33C0700594856 /* PizzaAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E324F0CF24C33C0700594856 /* PizzaAnnotation.swift */; };
 		E3DC5D9224C1BC20005D1D19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DC5D9124C1BC20005D1D19 /* AppDelegate.swift */; };
 		E3DC5D9424C1BC20005D1D19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */; };
 		E3DC5D9624C1BC20005D1D19 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DC5D9524C1BC20005D1D19 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E324F0CF24C33C0700594856 /* PizzaAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaAnnotation.swift; sourceTree = "<group>"; };
 		E3DC5D8E24C1BC20005D1D19 /* Pizza History.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza History.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DC5D9124C1BC20005D1D19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				E3DC5D9C24C1BC21005D1D19 /* LaunchScreen.storyboard */,
 				E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */,
 				E3DC5D9F24C1BC21005D1D19 /* Info.plist */,
+				E324F0CF24C33C0700594856 /* PizzaAnnotation.swift */,
 			);
 			path = PizzaHistoryMap;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3DC5D9624C1BC20005D1D19 /* ViewController.swift in Sources */,
+				E324F0D024C33C0700594856 /* PizzaAnnotation.swift in Sources */,
 				E3DC5D9224C1BC20005D1D19 /* AppDelegate.swift in Sources */,
 				E3DC5D9424C1BC20005D1D19 /* SceneDelegate.swift in Sources */,
 			);
