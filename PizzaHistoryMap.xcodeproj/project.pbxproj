@@ -16,6 +16,8 @@
 		E3DC5DA624C1BF3B005D1D19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */; };
 		E3DC5DA924C1BF6D005D1D19 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */; };
 		E3EC61E824C9D3BF00A07403 /* PizzaHistoryAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC61E724C9D3BF00A07403 /* PizzaHistoryAnnotations.swift */; };
+		E3EC61EB24C9DCB500A07403 /* AnnotationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC61E924C9DCB500A07403 /* AnnotationDetailViewController.swift */; };
+		E3EC61EC24C9DCB500A07403 /* AnnotationDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EC61EA24C9DCB500A07403 /* AnnotationDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E3EC61E724C9D3BF00A07403 /* PizzaHistoryAnnotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PizzaHistoryAnnotations.swift; sourceTree = "<group>"; };
+		E3EC61E924C9DCB500A07403 /* AnnotationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationDetailViewController.swift; sourceTree = "<group>"; };
+		E3EC61EA24C9DCB500A07403 /* AnnotationDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotationDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 		E3DC5D9024C1BC20005D1D19 /* PizzaHistoryMap */ = {
 			isa = PBXGroup;
 			children = (
+				E3EC61E924C9DCB500A07403 /* AnnotationDetailViewController.swift */,
+				E3EC61EA24C9DCB500A07403 /* AnnotationDetailViewController.xib */,
 				E3EC61E724C9D3BF00A07403 /* PizzaHistoryAnnotations.swift */,
 				E3DC5D9124C1BC20005D1D19 /* AppDelegate.swift */,
 				E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */,
@@ -143,6 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3EC61EC24C9DCB500A07403 /* AnnotationDetailViewController.xib in Resources */,
 				E3DC5D9E24C1BC21005D1D19 /* LaunchScreen.storyboard in Resources */,
 				E3DC5DA624C1BF3B005D1D19 /* Assets.xcassets in Resources */,
 				E3DC5D9924C1BC20005D1D19 /* Main.storyboard in Resources */,
@@ -160,6 +167,7 @@
 				E3EC61E824C9D3BF00A07403 /* PizzaHistoryAnnotations.swift in Sources */,
 				E324F0D024C33C0700594856 /* PizzaAnnotation.swift in Sources */,
 				E3DC5D9224C1BC20005D1D19 /* AppDelegate.swift in Sources */,
+				E3EC61EB24C9DCB500A07403 /* AnnotationDetailViewController.swift in Sources */,
 				E3DC5D9424C1BC20005D1D19 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

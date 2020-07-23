@@ -135,12 +135,20 @@ class ViewController: UIViewController, MKMapViewDelegate {
         annotationView.image = UIImage(named: "pizza pin")
         annotationView.canShowCallout = true
         let paragraph = UILabel()
-        paragraph.numberOfLines = 0
         paragraph.font = UIFont.preferredFont(forTextStyle: .caption1)
-        paragraph.text = annotation.historyText
+        paragraph.text = annotation.subtitle
+        paragraph.numberOfLines = 1
+        paragraph.adjustsFontSizeToFitWidth = true
         annotationView.detailCalloutAccessoryView = paragraph
-        annotationView.leftCalloutAccessoryView = UIImageView(image: annotation.pizzaPhoto  )
+        annotationView.leftCalloutAccessoryView = UIImageView(image: annotation.pizzaPhoto)
+        annotationView.rightCalloutAccessoryView = UIButton(type: .infoLight)
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let vc = AnnotationDetailViewController(nibName: "AnnotationDetailViewController", bundle: nil)
+        vc.annotation = view.annotation as! PizzaAnnotation
+        present(vc, animated: true, completion: nil)
     }
 }
 
