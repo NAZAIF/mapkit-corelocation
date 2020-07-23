@@ -138,7 +138,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         paragraph.numberOfLines = 0
         paragraph.font = UIFont.preferredFont(forTextStyle: .caption1)
         paragraph.text = annotation.historyText
-        annotationView.detailCalloutAccessoryView = paragraph 
+        annotationView.detailCalloutAccessoryView = paragraph
+        annotationView.leftCalloutAccessoryView = UIImageView(image: annotation.pizzaPhoto  )
         return annotationView
     }
 }
