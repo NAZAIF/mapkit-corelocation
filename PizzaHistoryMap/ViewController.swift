@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
     
     var coordinate2D = CLLocationCoordinate2DMake(40.8367321,14.2468856)
     var camera = MKMapCamera()
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         updateMapRegion(rangeSpan: 100)
     }
     
@@ -117,6 +118,19 @@ class ViewController: UIViewController {
         camera.pitch = 0
         changePitch.setTitle("", for: .normal)
         mapView.camera = camera
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var annotationView = MKPinAnnotationView()
+        guard let annotation = annotation as? PizzaAnnotation else {
+            return nil
+        }
+        if let dequedView = mapView.dequeueReusableAnnotationView(withIdentifier: annotation.identifier) as? MKPinAnnotationView {
+            annotationView = dequedView
+        } else {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotation.identifier)
+        }
+        return annotationView
     }
 }
 
