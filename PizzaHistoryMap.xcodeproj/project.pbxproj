@@ -15,6 +15,7 @@
 		E3DC5D9E24C1BC21005D1D19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5D9C24C1BC21005D1D19 /* LaunchScreen.storyboard */; };
 		E3DC5DA624C1BF3B005D1D19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */; };
 		E3DC5DA924C1BF6D005D1D19 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */; };
+		E3EC61E824C9D3BF00A07403 /* PizzaHistoryAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC61E724C9D3BF00A07403 /* PizzaHistoryAnnotations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E3DC5D9F24C1BC21005D1D19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3DC5DA524C1BF3B005D1D19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3DC5DA824C1BF6D005D1D19 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E3EC61E724C9D3BF00A07403 /* PizzaHistoryAnnotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PizzaHistoryAnnotations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		E3DC5D9024C1BC20005D1D19 /* PizzaHistoryMap */ = {
 			isa = PBXGroup;
 			children = (
+				E3EC61E724C9D3BF00A07403 /* PizzaHistoryAnnotations.swift */,
 				E3DC5D9124C1BC20005D1D19 /* AppDelegate.swift */,
 				E3DC5D9324C1BC20005D1D19 /* SceneDelegate.swift */,
 				E3DC5D9524C1BC20005D1D19 /* ViewController.swift */,
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3DC5D9624C1BC20005D1D19 /* ViewController.swift in Sources */,
+				E3EC61E824C9D3BF00A07403 /* PizzaHistoryAnnotations.swift in Sources */,
 				E324F0D024C33C0700594856 /* PizzaAnnotation.swift in Sources */,
 				E3DC5D9224C1BC20005D1D19 /* AppDelegate.swift in Sources */,
 				E3DC5D9424C1BC20005D1D19 /* SceneDelegate.swift in Sources */,

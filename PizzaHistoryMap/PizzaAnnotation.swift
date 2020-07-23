@@ -14,6 +14,7 @@ class PizzaAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     var identifier = "Pin"
+    var historyText = ""
     init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?) {
         self.coordinate = coordinate
         self.title = title
