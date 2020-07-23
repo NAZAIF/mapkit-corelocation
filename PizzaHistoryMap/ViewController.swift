@@ -133,6 +133,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
         annotationView.pinTintColor = UIColor.blue
         annotationView.canShowCallout = true
+        let paragraph = UILabel()
+        paragraph.numberOfLines = 0
+        paragraph.font = UIFont.preferredFont(forTextStyle: .caption1)
+        paragraph.text = annotation.historyText
+        annotationView.detailCalloutAccessoryView = paragraph 
         return annotationView
     }
 }
