@@ -131,7 +131,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         } else {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotation.identifier)
         }
-        annotationView.pinTintColor = UIColor.blue 
+        annotationView.pinTintColor = UIColor.blue
+        annotationView.canShowCallout = true
         return annotationView
     }
 }
