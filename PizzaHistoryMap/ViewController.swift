@@ -26,6 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         mapView.delegate = self
         mapView.addAnnotations(PizzaHistoryAnnotations().annotations)
+        addDeliveryOverlay()
         updateMapRegion(rangeSpan: 100)
     }
     
@@ -149,6 +150,25 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let vc = AnnotationDetailViewController(nibName: "AnnotationDetailViewController", bundle: nil)
         vc.annotation = view.annotation as! PizzaAnnotation
         present(vc, animated: true, completion: nil)
+    }
+    
+    func addDeliveryOverlay() {
+        let radius = 1600.0 //meters
+        for location in mapView.annotations {
+            let circle = MKCircle(center: location.coordinate, radius: radius)
+            mapView.addOverlay(circle)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let circle = overlay as? MKCircle { //succeed if it is a circle
+            let circleRenderer = MKCircleRenderer(circle: circle)
+            circleRenderer.fillColor = .init(red: 0, green: 0.1, blue: 0.1, alpha: 0.1)
+            circleRenderer.strokeColor = .blue
+            circleRenderer.lineWidth = 1
+            return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
     }
 }
 
