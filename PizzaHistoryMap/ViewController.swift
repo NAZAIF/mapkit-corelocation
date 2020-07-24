@@ -89,7 +89,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             return
         case 2: //  Chicago
             coordinate2D = CLLocationCoordinate2DMake(41.892479 , -87.6267592)
-            updateMapCamera(heading: 12, altitude: 2)
+            updateMapCamera(heading: 0, altitude: 15000)
             return
         case 3: //  Chatham
             coordinate2D = CLLocationCoordinate2DMake(42.4056555,-82.1860369)
@@ -102,6 +102,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
 //            pizzaPin.title = "Fusion Cuisine Pizza"
 //            pizzaPin.subtitle = "Also known as California Pizza"
 //            mapView.addAnnotation(pizzaPin)
+            updateMapCamera(heading: 0, altitude: 10000)
+            return
         default:
             coordinate2D = CLLocationCoordinate2DMake(34.0674607,-118.3977309)
         }
