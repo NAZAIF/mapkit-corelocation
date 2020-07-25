@@ -134,7 +134,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         } else {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotation.identifier)
         }
-//        annotationView.pinTintColor = UIColor.blue
+
         annotationView.image = UIImage(named: "pizza pin")
         annotationView.canShowCallout = true
         let paragraph = UILabel()
