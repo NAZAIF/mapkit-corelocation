@@ -27,6 +27,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         mapView.addAnnotations(PizzaHistoryAnnotations().annotations)
         addDeliveryOverlay()
+        addPolyLines()
         updateMapRegion(rangeSpan: 100)
     }
     
@@ -102,7 +103,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
 //            pizzaPin.title = "Fusion Cuisine Pizza"
 //            pizzaPin.subtitle = "Also known as California Pizza"
 //            mapView.addAnnotation(pizzaPin)
-            updateMapCamera(heading: 0, altitude: 10000)
+            updateMapCamera(heading: 0, altitude: 1500)
             return
         default:
             coordinate2D = CLLocationCoordinate2DMake(34.0674607,-118.3977309)
@@ -154,6 +155,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
         present(vc, animated: true, completion: nil)
     }
     
+    func addPolyLines() {
+        let annotations = PizzaHistoryAnnotations().annotations
+        let beverlyHills1 = annotations[5].coordinate
+        let beverlyHills2 = annotations[6].coordinate
+        let bhpolyLine = MKPolyline(coordinates: [beverlyHills1, beverlyHills2], count: 2)
+        bhpolyLine.title = "BeverlyHills_Line"
+        mapView.addOverlays([bhpolyLine])
+    }
+    
     func addDeliveryOverlay() {
 //        let radius = 1600.0 //meters
         for location in mapView.annotations {
@@ -166,6 +176,13 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyLine = overlay as? MKPolyline {
+            let polyLineRenderer = MKPolylineRenderer(polyline: polyLine)
+            polyLineRenderer.strokeColor = .green
+            polyLineRenderer.lineWidth = 3.0
+            polyLineRenderer.lineDashPattern = [20,10,2,10]
+            return polyLineRenderer
+        }
         if let circle = overlay as? MKCircle { //succeed if it is a circle
             let circleRenderer = MKCircleRenderer(circle: circle)
             circleRenderer.fillColor = .init(red: 0, green: 0.1, blue: 0.1, alpha: 0.1)
