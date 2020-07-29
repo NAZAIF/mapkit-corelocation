@@ -157,10 +157,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     func addPolyLines() {
         let annotations = PizzaHistoryAnnotations().annotations
-        let beverlyHills1 = annotations[5].coordinate
-        let beverlyHills2 = annotations[6].coordinate
-        let bhpolyLine = MKPolyline(coordinates: [beverlyHills1, beverlyHills2], count: 2)
-        bhpolyLine.title = "BeverlyHills_Line"
+       let bhpolyLine = MKPolyline(coordinates: annotations.map({ (annotation) -> CLLocationCoordinate2D in
+            annotation.coordinate
+       }), count: annotations.count)
+        bhpolyLine.title = "All_Restaurants_Line"
         mapView.addOverlays([bhpolyLine])
     }
     
@@ -178,8 +178,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyLine = overlay as? MKPolyline {
             let polyLineRenderer = MKPolylineRenderer(polyline: polyLine)
-            polyLineRenderer.strokeColor = .green
-            polyLineRenderer.lineWidth = 3.0
+            polyLineRenderer.strokeColor = .red
+            polyLineRenderer.lineWidth = 5.0
             polyLineRenderer.lineDashPattern = [20,10,2,10]
             return polyLineRenderer
         }
