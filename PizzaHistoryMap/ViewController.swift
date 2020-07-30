@@ -9,12 +9,14 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var coordinate2D = CLLocationCoordinate2DMake(40.8367321,14.2468856)
     var camera = MKMapCamera()
     var pitch = 0
     var isOn = false
+    
+    var locationManager = CLLocationManager()
     
     //MARK: Outlets
     @IBOutlet weak var changeMapType: UIButton!
@@ -25,6 +27,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        locationManager.delegate = self
         mapView.addAnnotations(PizzaHistoryAnnotations().annotations)
         addDeliveryOverlay()
         addPolyLines()
@@ -71,12 +74,14 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func findHere(_ sender: UIButton) {
+        setupCoreLocation()
     }
     
     @IBAction func findPizza(_ sender: UIButton) {
     }
     
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
+        disableLocationServices()
         let index = sender.selectedSegmentIndex
 //        mapView.removeAnnotations(mapView.annotations)
         switch index {
@@ -175,6 +180,31 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    func setupCoreLocation() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+            break
+            
+        case .authorizedAlways:
+            enableLocationServices()
+        default:
+            break
+        }
+    }
+    
+    func enableLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            mapView.setUserTrackingMode(.follow, animated: true)
+        }
+    }
+    
+    func disableLocationServices() {
+        locationManager.stopUpdatingLocation()
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyLine = overlay as? MKPolyline {
             let polyLineRenderer = MKPolylineRenderer(polyline: polyLine)
@@ -191,6 +221,28 @@ class ViewController: UIViewController, MKMapViewDelegate {
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways:
+            print("authorized")
+            
+        case .denied, .restricted:
+            print("Not authorized")
+        default:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last!
+        coordinate2D = location.coordinate
+        let displayString = "\(location.timestamp) Coord:\(coordinate2D) Alt: \(location.altitude) meters"
+        print(displayString)
+        updateMapRegion(rangeSpan: 200)
+        let pizzaPin = PizzaAnnotation(coordinate: coordinate2D, title: displayString, subtitle: "")
+        mapView.addAnnotation(pizzaPin)
     }
 }
 

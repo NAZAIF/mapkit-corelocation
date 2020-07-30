@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A0E94524-1837-4309-A0B3-13BCD78766D9"
+            uuid = "BDC49F7A-E07C-4019-B126-DE557C6E139D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PizzaHistoryMap/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "mapView(_:rendererFor:)"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "setupCoreLocation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4FCE61B2-B4C7-4A0D-A5CF-B7268AD98C4B"
+            uuid = "17497392-C4AC-49D5-9F8D-C662AF97C61D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PizzaHistoryMap/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "mapView(_:rendererFor:)"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "enableLocationServices()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
