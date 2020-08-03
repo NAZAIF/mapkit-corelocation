@@ -64,8 +64,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func toggleMapFeatures(_ sender: UIButton) {
-//        mapView.showsBuildings = isOn
-//        isOn = !isOn
+        //        mapView.showsBuildings = isOn
+        //        isOn = !isOn
         isOn = !mapView.showsPointsOfInterest
         mapView.showsPointsOfInterest = isOn
         mapView.showsScale = isOn
@@ -83,15 +83,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
         disableLocationServices()
         let index = sender.selectedSegmentIndex
-//        mapView.removeAnnotations(mapView.annotations)
+        //        mapView.removeAnnotations(mapView.annotations)
         switch index {
         case 0: // Naples
             coordinate2D = CLLocationCoordinate2DMake(40.8367321,14.2468856)
         case 1: // New York
             coordinate2D = CLLocationCoordinate2DMake(40.7216294 , -73.995453)
             updateMapCamera(heading: 245, altitude: 250)
-//            let pizzaPin = PizzaAnnotation(coordinate: coordinate2D, title: "New York Pizza", subtitle: "Pizza comes to America")
-//            mapView.addAnnotation(pizzaPin)
+            //            let pizzaPin = PizzaAnnotation(coordinate: coordinate2D, title: "New York Pizza", subtitle: "Pizza comes to America")
+            //            mapView.addAnnotation(pizzaPin)
             return
         case 2: //  Chicago
             coordinate2D = CLLocationCoordinate2DMake(41.892479 , -87.6267592)
@@ -103,11 +103,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         case 4: //  Beverly Hills
             coordinate2D = CLLocationCoordinate2DMake(34.0674607,-118.3977309)
-//            let pizzaPin = MKPointAnnotation()
-//            pizzaPin.coordinate = coordinate2D
-//            pizzaPin.title = "Fusion Cuisine Pizza"
-//            pizzaPin.subtitle = "Also known as California Pizza"
-//            mapView.addAnnotation(pizzaPin)
+            //            let pizzaPin = MKPointAnnotation()
+            //            pizzaPin.coordinate = coordinate2D
+            //            pizzaPin.title = "Fusion Cuisine Pizza"
+            //            pizzaPin.subtitle = "Also known as California Pizza"
+            //            mapView.addAnnotation(pizzaPin)
             updateMapCamera(heading: 0, altitude: 1500)
             return
         default:
@@ -140,7 +140,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         } else {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotation.identifier)
         }
-
+        
         annotationView.image = UIImage(named: "pizza pin")
         annotationView.canShowCallout = true
         let paragraph = UILabel()
@@ -162,15 +162,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func addPolyLines() {
         let annotations = PizzaHistoryAnnotations().annotations
-       let bhpolyLine = MKPolyline(coordinates: annotations.map({ (annotation) -> CLLocationCoordinate2D in
+        let bhpolyLine = MKPolyline(coordinates: annotations.map({ (annotation) -> CLLocationCoordinate2D in
             annotation.coordinate
-       }), count: annotations.count)
+        }), count: annotations.count)
         bhpolyLine.title = "All_Restaurants_Line"
         mapView.addOverlays([bhpolyLine])
     }
     
     func addDeliveryOverlay() {
-//        let radius = 1600.0 //meters
+        //        let radius = 1600.0 //meters
         for location in mapView.annotations {
             if let radius = (location as! PizzaAnnotation).deliveryRadius {
                 let circle = MKCircle(center: location.coordinate, radius: radius)
