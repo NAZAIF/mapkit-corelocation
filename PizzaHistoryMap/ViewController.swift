@@ -15,6 +15,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var camera = MKMapCamera()
     var pitch = 0
     var isOn = false
+    var heading = 0.0
     
     var locationManager = CLLocationManager()
     
@@ -200,6 +201,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             locationManager.startUpdatingLocation()
             mapView.setUserTrackingMode(.follow, animated: true)
         }
+        
+        if CLLocationManager.headingAvailable() { // check if magnetometer is available
+            locationManager.startUpdatingHeading()
+        } else {
+            print("heading not available")
+        }
     }
     
     func disableLocationServices() {
@@ -240,7 +247,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let location = locations.last!
         coordinate2D = location.coordinate
         let speedString = "\(location.speed * 2.23694) mph"
-        let headingString = " Heading: \(location.course)º"
+        let headingString = " Heading: \(heading)º"
         let courseString = headingString + " at " + speedString
         print(courseString)
         let displayString = "\(location.timestamp) Coord:\(coordinate2D) Alt: \(location.altitude) meters"
@@ -248,6 +255,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         updateMapRegion(rangeSpan: 200)
         let pizzaPin = PizzaAnnotation(coordinate: coordinate2D, title: displayString, subtitle: "")
         mapView.addAnnotation(pizzaPin)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        heading = newHeading.magneticHeading
     }
 }
 
