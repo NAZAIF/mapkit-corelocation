@@ -64,6 +64,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func toggleMapFeatures(_ sender: UIButton) {
+        disableLocationServices()
         //        mapView.showsBuildings = isOn
         //        isOn = !isOn
         isOn = !mapView.showsPointsOfInterest
@@ -238,6 +239,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
         coordinate2D = location.coordinate
+        let speedString = "\(location.speed * 2.23694) mph"
+        let headingString = " Heading: \(location.course)º"
+        let courseString = headingString + " at " + speedString
+        print(courseString)
         let displayString = "\(location.timestamp) Coord:\(coordinate2D) Alt: \(location.altitude) meters"
         print(displayString)
         updateMapRegion(rangeSpan: 200)
