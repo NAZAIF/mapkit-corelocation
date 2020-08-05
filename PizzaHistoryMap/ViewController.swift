@@ -16,7 +16,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var pitch = 0
     var isOn = false
     var heading = 0.0
-    
+    let onRampCoordinate = CLLocationCoordinate2DMake(37.33458564, -122.035293)
     var locationManager = CLLocationManager()
     
     //MARK: Outlets
@@ -207,10 +207,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         } else {
             print("heading not available")
         }
+        monitorRegion(center: onRampCoordinate, radius: 100, id: "On ramp")
     }
     
     func disableLocationServices() {
         locationManager.stopUpdatingLocation()
+    }
+    
+    func monitorRegion(center: CLLocationCoordinate2D, radius: CLLocationDistance, id: String) {
+        // Since geofencing works in background, it needs always on status
+        if CLLocationManager.authorizationStatus() == .authorizedAlways {
+            print("always authorized 11223")
+            // region monitoring is unavailable in some devices
+            if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
+                print("monitoring available 11223")
+                let region = CLCircularRegion(center: center, radius: radius, identifier: id)
+                region.notifyOnExit = true
+                region.notifyOnEntry = true
+                locationManager.startMonitoring(for: region)
+            }
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -229,6 +245,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        let circularRegion = region as! CLCircularRegion
+        if circularRegion.identifier == "On ramp" {
+            let alert = UIAlertController(title: "Pizza History", message: "You are on the ramp", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
