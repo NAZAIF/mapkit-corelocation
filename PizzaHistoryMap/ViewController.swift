@@ -257,6 +257,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        let circularRegion = region as! CLCircularRegion
+        if circularRegion.identifier == "On ramp" {
+            let alert = UIAlertController(title: "Pizza History", message: "You are out of the ramp", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways:
