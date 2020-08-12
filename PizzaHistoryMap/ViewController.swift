@@ -162,6 +162,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         present(vc, animated: true, completion: nil)
     }
     
+    //    Adds polylines connecting all annotations
     func addPolyLines() {
         let annotations = PizzaHistoryAnnotations().annotations
         let bhpolyLine = MKPolyline(coordinates: annotations.map({ (annotation) -> CLLocationCoordinate2D in

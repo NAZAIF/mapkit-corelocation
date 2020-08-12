@@ -46,7 +46,7 @@ class PizzaHistoryAnnotations{
         annotations.append(annotation)
         //Beverly Hills II
         annotation = PizzaAnnotation(coordinate: CLLocationCoordinate2DMake(34.0647691,-118.3991328), title: "BBQ Chicken Pizza", subtitle: "Fusion for everyone")
-      
+        
         annotation.historyText = "Two Los Angles Attorneys, Larry Flax and Rick Rosenfeld were so entranced by Ed LaDou’s pizzas they started a casual dining restaurant with some of LaDou’s creations, including a new one of barbecue sauce and chicken. The restaurant was so successful, it became an chain throughout North America,South America and Asia, popularizing non-Italian and often Asian ingredients in pizza. A national food of Italy becomes a uniquely American food all over the world. Suspiciously, there are no locations in Europe."
         annotations.append(annotation)
     }
