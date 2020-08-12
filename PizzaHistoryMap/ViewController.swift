@@ -80,6 +80,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func findPizza(_ sender: UIButton) {
+        let address = "2121 North. Clark St. IL"
+        getCoordinates(address: address) { (coordinate, location, error) in
+            if let coordinate = coordinate {
+                self.mapView.camera.centerCoordinate = coordinate
+                self.mapView.camera.altitude = 1000
+                let pin = PizzaAnnotation(coordinate: coordinate, title: address, subtitle: location)
+                self.mapView.addAnnotation(pin)
+            }
+        }
     }
     
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
@@ -296,6 +305,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         heading = newHeading.magneticHeading
+    }
+    
+    func getCoordinates(address: String, completionHandler: @escaping (CLLocationCoordinate2D?, String, NSError?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let coordinate = placemark.location?.coordinate
+                    let location = placemark.locality! + " " + placemark.isoCountryCode!
+                    completionHandler(coordinate, location, nil)
+                    return
+                }
+            }
+            completionHandler(nil, "", error as NSError?)
+        }
     }
 }
 

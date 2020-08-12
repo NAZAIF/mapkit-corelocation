@@ -14,10 +14,10 @@
             filePath = "PizzaHistoryMap/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "locationManager(_:didEnterRegion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,10 +30,10 @@
             filePath = "PizzaHistoryMap/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "locationManager(_:didEnterRegion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
