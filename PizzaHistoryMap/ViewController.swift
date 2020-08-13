@@ -100,7 +100,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if let response = response {
                 for mapItem in response.mapItems {
                     let placemark = mapItem.placemark
-                    self.mapView.addAnnotation(placemark)
+//                    self.mapView.addAnnotation(placemark)
+                    let name = placemark.name
+                    let coordinate = placemark.coordinate
+                    let streetAddress = placemark.thoroughfare
+                    let annotation = PizzaAnnotation(coordinate: coordinate, title: name, subtitle: streetAddress)
+                    self.mapView.addAnnotation(annotation)
                 }
             }
         }
