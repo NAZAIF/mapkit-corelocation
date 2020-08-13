@@ -80,6 +80,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func findPizza(_ sender: UIButton) {
+        /*
         let address = "2121 North. Clark St. IL"
         getCoordinates(address: address) { (coordinate, location, error) in
             if let coordinate = coordinate {
@@ -87,6 +88,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.mapView.camera.altitude = 1000
                 let pin = PizzaAnnotation(coordinate: coordinate, title: address, subtitle: location)
                 self.mapView.addAnnotation(pin)
+            }
+        }
+ */
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "Pizza"
+        updateMapRegion(rangeSpan: 500)
+        request.region = mapView.region
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            if let response = response {
+                for mapItem in response.mapItems {
+                    let placemark = mapItem.placemark
+                    self.mapView.addAnnotation(placemark)
+                }
             }
         }
     }
