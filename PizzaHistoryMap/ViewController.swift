@@ -91,7 +91,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
  */
-        let request = MKLocalSearch.Request()
+   /*     let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "Pizza"
         updateMapRegion(rangeSpan: 500)
         request.region = mapView.region
@@ -108,7 +108,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     self.mapView.addAnnotation(annotation)
                 }
             }
-        }
+        }*/
+        let annotations = PizzaHistoryAnnotations().annotations
+        let SPGO = annotations[5].coordinate
+        let CPK = annotations[6].coordinate
+        let CPOG = annotations[4].coordinate
+        let UNO = annotations[2].coordinate
+        
+        findDirection(start: SPGO, destination: CPK)
+        findDirection(start: CPOG, destination: UNO)
+        
     }
     
     @IBAction func locationPicker(_ sender: UISegmentedControl) {
@@ -262,10 +271,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyLine = overlay as? MKPolyline {
             let polyLineRenderer = MKPolylineRenderer(polyline: polyLine)
-            polyLineRenderer.strokeColor = .red
-            polyLineRenderer.lineWidth = 5.0
-            polyLineRenderer.lineDashPattern = [20,10,2,10]
-            return polyLineRenderer
+            
+            if polyLine.title == "Directions" {
+                polyLineRenderer.strokeColor = .blue
+                polyLineRenderer.lineWidth = 3.0
+                return polyLineRenderer
+            } else {
+                polyLineRenderer.strokeColor = .red
+                polyLineRenderer.lineWidth = 5.0
+                polyLineRenderer.lineDashPattern = [20,10,2,10]
+                return polyLineRenderer
+            }
         }
         if let circle = overlay as? MKCircle { //succeed if it is a circle
             let circleRenderer = MKCircleRenderer(circle: circle)
@@ -340,6 +356,34 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
             completionHandler(nil, "", error as NSError?)
         }
+    }
+    
+    func findDirection(start: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
+        let startMapItem = MKMapItem(placemark: MKPlacemark(coordinate: start))
+        let destinationMapItem = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        let request = MKDirections.Request()
+        request.source = startMapItem
+        request.destination = destinationMapItem
+        request.requestsAlternateRoutes = true // default is false and gives best route
+        request.transportType = .automobile // default is any
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            if let error = error as? MKError {
+                print("Error in Find: \(error.errorCode) \(error.localizedDescription )")
+                return
+            }
+            if let response = response {
+                let routes = response.routes
+                print("\(routes.count) routes")
+                for route in routes {
+                    let routeDescription = "\(route.expectedTravelTime/60) min / \(route.distance/1609.344) miles " + route.name
+                    let polyLine = route.polyline
+                    polyLine.title = "Directions"
+                    self.mapView.addOverlay(polyLine)
+                }
+            }
+        }
+        
     }
 }
 
