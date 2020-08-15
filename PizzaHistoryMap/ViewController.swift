@@ -390,6 +390,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 let annotation = PizzaAnnotation(coordinate: destinationCoordinate, title: "Destination", subtitle: routeDescription)
                 for routeStep in route.steps {
                     routeDescription += routeStep.instructions + ". Go \(routeStep.distance/1609.334) mil \n"
+                    self.mapView.addOverlay(routeStep.polyline)
                 }
                 annotation.historyText = routeDescription
                 self.mapView.addAnnotation(annotation)
