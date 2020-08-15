@@ -181,7 +181,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotation.identifier)
         }
         
-        annotationView.image = UIImage(named: "pizza pin")
+        if annotation.title == "Destination" {
+            annotationView.image = #imageLiteral(resourceName: "destination")
+        } else {
+            annotationView.image = UIImage(named: "pizza pin")
+        }
         annotationView.canShowCallout = true
         let paragraph = UILabel()
         paragraph.font = UIFont.preferredFont(forTextStyle: .caption1)
@@ -376,11 +380,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 let routes = response.routes
                 print("\(routes.count) routes")
                 for route in routes {
-                    let routeDescription = "\(route.expectedTravelTime/60) min / \(route.distance/1609.344) miles " + route.name
                     let polyLine = route.polyline
                     polyLine.title = "Directions"
                     self.mapView.addOverlay(polyLine)
                 }
+                let destinationCoordinate = response.destination.placemark.coordinate
+                let route = response.routes.first!
+                var routeDescription = route.name + "\(route.expectedTravelTime/60) min / \(route.distance/1609.344) miles "
+                let annotation = PizzaAnnotation(coordinate: destinationCoordinate, title: "Destination", subtitle: routeDescription)
+                for routeStep in route.steps {
+                    routeDescription += routeStep.instructions + ". Go \(routeStep.distance/1609.334) mil \n"
+                }
+                annotation.historyText = routeDescription
+                self.mapView.addAnnotation(annotation)
             }
         }
         
