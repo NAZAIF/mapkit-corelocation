@@ -110,12 +110,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }*/
         let annotations = PizzaHistoryAnnotations().annotations
-        let SPGO = annotations[5].coordinate
-        let CPK = annotations[6].coordinate
+//        let SPGO = annotations[5].coordinate
+//        let CPK = annotations[6].coordinate
         let CPOG = annotations[4].coordinate
         let UNO = annotations[2].coordinate
         
-        findDirection(start: SPGO, destination: CPK)
+//        findDirection(start: SPGO, destination: CPK)
         findDirection(start: CPOG, destination: UNO)
         
     }
@@ -369,8 +369,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         request.source = startMapItem
         request.destination = destinationMapItem
         request.requestsAlternateRoutes = true // default is false and gives best route
-        request.transportType = .automobile // default is any
+        request.transportType = .transit // default is any. transit brings error as this can be only opened by Apple Maps, not MapKit
         let directions = MKDirections(request: request)
+        if request.transportType == .transit {
+            destinationMapItem.name = "Pizza Pot Pie"
+            startMapItem.name = "Deep Dish Pizza"
+            MKMapItem.openMaps(with: [destinationMapItem, startMapItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit])
+        }
         directions.calculate { (response, error) in
             if let error = error as? MKError {
                 print("Error in Find: \(error.errorCode) \(error.localizedDescription )")
