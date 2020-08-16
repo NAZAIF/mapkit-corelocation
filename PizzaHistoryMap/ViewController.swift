@@ -18,7 +18,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var heading = 0.0
     let onRampCoordinate = CLLocationCoordinate2DMake(37.33458564, -122.035293)
     var locationManager = CLLocationManager()
-    
+    var startMapItem = MKMapItem()
+    var destinationMapItem = MKMapItem()
     //MARK: Outlets
     @IBOutlet weak var changeMapType: UIButton!
     @IBOutlet weak var changePitch: UIButton!
@@ -81,41 +82,41 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBAction func findPizza(_ sender: UIButton) {
         /*
-        let address = "2121 North. Clark St. IL"
-        getCoordinates(address: address) { (coordinate, location, error) in
-            if let coordinate = coordinate {
-                self.mapView.camera.centerCoordinate = coordinate
-                self.mapView.camera.altitude = 1000
-                let pin = PizzaAnnotation(coordinate: coordinate, title: address, subtitle: location)
-                self.mapView.addAnnotation(pin)
-            }
-        }
- */
-   /*     let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "Pizza"
-        updateMapRegion(rangeSpan: 500)
-        request.region = mapView.region
-        let search = MKLocalSearch(request: request)
-        search.start { (response, error) in
-            if let response = response {
-                for mapItem in response.mapItems {
-                    let placemark = mapItem.placemark
-//                    self.mapView.addAnnotation(placemark)
-                    let name = placemark.name
-                    let coordinate = placemark.coordinate
-                    let streetAddress = placemark.thoroughfare
-                    let annotation = PizzaAnnotation(coordinate: coordinate, title: name, subtitle: streetAddress)
-                    self.mapView.addAnnotation(annotation)
-                }
-            }
-        }*/
+         let address = "2121 North. Clark St. IL"
+         getCoordinates(address: address) { (coordinate, location, error) in
+         if let coordinate = coordinate {
+         self.mapView.camera.centerCoordinate = coordinate
+         self.mapView.camera.altitude = 1000
+         let pin = PizzaAnnotation(coordinate: coordinate, title: address, subtitle: location)
+         self.mapView.addAnnotation(pin)
+         }
+         }
+         */
+        /*     let request = MKLocalSearch.Request()
+         request.naturalLanguageQuery = "Pizza"
+         updateMapRegion(rangeSpan: 500)
+         request.region = mapView.region
+         let search = MKLocalSearch(request: request)
+         search.start { (response, error) in
+         if let response = response {
+         for mapItem in response.mapItems {
+         let placemark = mapItem.placemark
+         //                    self.mapView.addAnnotation(placemark)
+         let name = placemark.name
+         let coordinate = placemark.coordinate
+         let streetAddress = placemark.thoroughfare
+         let annotation = PizzaAnnotation(coordinate: coordinate, title: name, subtitle: streetAddress)
+         self.mapView.addAnnotation(annotation)
+         }
+         }
+         }*/
         let annotations = PizzaHistoryAnnotations().annotations
-//        let SPGO = annotations[5].coordinate
-//        let CPK = annotations[6].coordinate
+        //        let SPGO = annotations[5].coordinate
+        //        let CPK = annotations[6].coordinate
         let CPOG = annotations[4].coordinate
         let UNO = annotations[2].coordinate
         
-//        findDirection(start: SPGO, destination: CPK)
+        //        findDirection(start: SPGO, destination: CPK)
         findDirection(start: CPOG, destination: UNO)
         
     }
@@ -199,6 +200,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let annotation = view.annotation as! PizzaAnnotation
+        if annotation.identifier == "Transit" {
+            destinationMapItem.name = "Pizza Pot Pie"
+            startMapItem.name = "Deep Dish Pizza"
+            MKMapItem.openMaps(with: [destinationMapItem, startMapItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit])
+            return
+        }
+        
         let vc = AnnotationDetailViewController(nibName: "AnnotationDetailViewController", bundle: nil)
         vc.annotation = view.annotation as! PizzaAnnotation
         present(vc, animated: true, completion: nil)
@@ -363,8 +372,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func findDirection(start: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
-        let startMapItem = MKMapItem(placemark: MKPlacemark(coordinate: start))
-        let destinationMapItem = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        startMapItem = MKMapItem(placemark: MKPlacemark(coordinate: start))
+        destinationMapItem = MKMapItem(placemark: MKPlacemark(coordinate: destination))
         let request = MKDirections.Request()
         request.source = startMapItem
         request.destination = destinationMapItem
@@ -372,9 +381,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         request.transportType = .transit // default is any. transit brings error as this can be only opened by Apple Maps, not MapKit
         let directions = MKDirections(request: request)
         if request.transportType == .transit {
-            destinationMapItem.name = "Pizza Pot Pie"
-            startMapItem.name = "Deep Dish Pizza"
-            MKMapItem.openMaps(with: [destinationMapItem, startMapItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit])
+            directions.calculateETA { (response, error) in
+                let annotation = PizzaAnnotation(coordinate: destination , title: "Destination", subtitle: "No Transit Available")
+                if let response = response {
+                    annotation.subtitle = String(format: "%4.2f minutes", response.expectedTravelTime/60.0)
+                }
+                annotation.identifier = "Transit"
+                self.mapView.addAnnotation(annotation)
+            }
+            return
         }
         directions.calculate { (response, error) in
             if let error = error as? MKError {
